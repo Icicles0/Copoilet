@@ -67,6 +67,10 @@ def game():
                     playery -= 20
                 if event.key == pygame.K_j:
                     playery += 20
+                if event.key == pygame.K_h:
+                    playerx -= 20
+                if event.key == pygame.K_l:
+                    playerx += 20
                 if event.key == pygame.K_ESCAPE:
                     pygame.quit()
                     quit()
