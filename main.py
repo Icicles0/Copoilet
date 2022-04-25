@@ -50,13 +50,14 @@ def game():
         # if touching spikes print "You lose"
         for i in range(0, 5):
             if playerx > x_spikes[i] and playerx < x_spikes[i] + 100 and playery > y_spikes[i] and playery < y_spikes[i] + 100:
-                if health == 0:
+                if health == 1:
                     print('Health: 0')
                     lose()
                 else:
                     health -= 1
                     print('Health:' , str(health))
-                    time.sleep(0.3)
+                    playerx = 100
+                    playery = 100
 
         # draw a rectangle as for the player
         pygame.draw.rect(screen, (0, 255, 0), (playerx, playery, 50, 50))
