@@ -2,7 +2,12 @@ import pygame
 import os
 import sys
 import random
+import time
 
+def lose():
+    pygame.quit()
+    input("You lose\n")
+    sys.exit()
 
 def game():
     print("You are a helecopter pilot. One day you are assigned a mission to attack a russian base")
@@ -24,6 +29,10 @@ def game():
     # create window loop
     playerx = 100
     playery = 100
+    # make varible for player health
+    health = 3
+    print('Health:' , str(health))
+
     while True:
         # fill the screen with a color white
         screen.fill((255, 255, 255))
@@ -41,10 +50,14 @@ def game():
         # if touching spikes print "You lose"
         for i in range(0, 5):
             if playerx > x_spikes[i] and playerx < x_spikes[i] + 100 and playery > y_spikes[i] and playery < y_spikes[i] + 100:
-                os.system("cls")
-                pygame.quit()
-                input("You lose\n")
-                sys.exit()
+                if health == 0:
+                    print('Health: 0')
+                    lose()
+                else:
+                    health -= 1
+                    print('Health:' , str(health))
+                    time.sleep(0.3)
+
         # draw a rectangle as for the player
         pygame.draw.rect(screen, (0, 255, 0), (playerx, playery, 50, 50))
         # update the window
