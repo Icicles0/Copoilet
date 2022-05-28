@@ -2,7 +2,6 @@ import pygame
 import os
 import sys
 import random
-import time
 
 def lose():
     pygame.quit()
@@ -10,8 +9,6 @@ def lose():
     sys.exit()
 
 def game():
-    print("You are a helecopter pilot. One day you are assigned a mission to attack a russian base")
-    print("You are in a helicopter and you have to land on the base.")
     # open a window with a size of 800x600
     pygame.init()
     screen = pygame.display.set_mode((800, 600))
@@ -26,6 +23,18 @@ def game():
     # create 10 variables for x and y coordinates of the spikes
     x_spikes = [random.randint(0, 800) for i in range(10)]
     y_spikes = [random.randint(0, 600) for i in range(10)]
+    # if a spike is on the spawn point, move it to a random position
+    for i in range(10):
+        if x_spikes[i] == 400 and y_spikes[i] == 300:
+            x_spikes[i] = random.randint(0, 800)
+            y_spikes[i] = random.randint(0, 600)
+    # if the spikes are right next to each other, move them to a random position
+    for i in range(10):
+        for j in range(10):
+            if i != j:
+                if x_spikes[i] == x_spikes[j] and y_spikes[i] == y_spikes[j]:
+                    x_spikes[i] = random.randint(0, 800)
+                    y_spikes[i] = random.randint(0, 600)
     # create window loop
     playerx = 100
     playery = 100
@@ -94,9 +103,5 @@ def game():
                 quit()
 
 
-print("Welcome to Copoilet!")
-play = input("Do you want to play?[y/n]: ")
-if play.lower() == "y":
+if __name__ == "__main__":
     game()
-else:
-    print("Bye!")
